@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.campus.order.mapper.MerchantMapper" >
+  <resultMap id="BaseResultMap" type="com.campus.order.domain.Merchant" >
+    <id column="m_id" property="mId" jdbcType="BIGINT" />
+    <result column="m_name" property="mName" jdbcType="VARCHAR" />
+    <result column="m_photo" property="mPhoto" jdbcType="VARCHAR" />
+    <result column="m_address" property="mAddress" jdbcType="VARCHAR" />
+    <result column="m_phone" property="mPhone" jdbcType="BIGINT" />
+    <result column="m_special" property="mSpecial" jdbcType="VARCHAR" />
+    <result column="m_active" property="mActive" jdbcType="VARCHAR" />
+    <result column="m_date" property="mDate" jdbcType="TIMESTAMP" />
+    <result column="m_price" property="mPrice" jdbcType="DECIMAL" />
+    <result column="m_pid" property="mPid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    m_id, m_name, m_photo, m_address, m_phone, m_special, m_active, m_date, m_price, 
+    m_pid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.campus.order.domain.MerchantExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from merchant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from merchant
+    where m_id = #{mId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from merchant
+    where m_id = #{mId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.campus.order.domain.MerchantExample" >
+    delete from merchant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.campus.order.domain.Merchant" >
+    insert into merchant (m_id, m_name, m_photo, 
+      m_address, m_phone, m_special, 
+      m_active, m_date, m_price, 
+      m_pid)
+    values (#{mId,jdbcType=BIGINT}, #{mName,jdbcType=VARCHAR}, #{mPhoto,jdbcType=VARCHAR}, 
+      #{mAddress,jdbcType=VARCHAR}, #{mPhone,jdbcType=BIGINT}, #{mSpecial,jdbcType=VARCHAR}, 
+      #{mActive,jdbcType=VARCHAR}, #{mDate,jdbcType=TIMESTAMP}, #{mPrice,jdbcType=DECIMAL}, 
+      #{mPid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.campus.order.domain.Merchant" >
+    insert into merchant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        m_id,
+      </if>
+      <if test="mName != null" >
+        m_name,
+      </if>
+      <if test="mPhoto != null" >
+        m_photo,
+      </if>
+      <if test="mAddress != null" >
+        m_address,
+      </if>
+      <if test="mPhone != null" >
+        m_phone,
+      </if>
+      <if test="mSpecial != null" >
+        m_special,
+      </if>
+      <if test="mActive != null" >
+        m_active,
+      </if>
+      <if test="mDate != null" >
+        m_date,
+      </if>
+      <if test="mPrice != null" >
+        m_price,
+      </if>
+      <if test="mPid != null" >
+        m_pid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        #{mId,jdbcType=BIGINT},
+      </if>
+      <if test="mName != null" >
+        #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mPhoto != null" >
+        #{mPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="mAddress != null" >
+        #{mAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mPhone != null" >
+        #{mPhone,jdbcType=BIGINT},
+      </if>
+      <if test="mSpecial != null" >
+        #{mSpecial,jdbcType=VARCHAR},
+      </if>
+      <if test="mActive != null" >
+        #{mActive,jdbcType=VARCHAR},
+      </if>
+      <if test="mDate != null" >
+        #{mDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mPrice != null" >
+        #{mPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="mPid != null" >
+        #{mPid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.campus.order.domain.MerchantExample" resultType="java.lang.Integer" >
+    select count(*) from merchant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update merchant
+    <set >
+      <if test="record.mId != null" >
+        m_id = #{record.mId,jdbcType=BIGINT},
+      </if>
+      <if test="record.mName != null" >
+        m_name = #{record.mName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mPhoto != null" >
+        m_photo = #{record.mPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mAddress != null" >
+        m_address = #{record.mAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mPhone != null" >
+        m_phone = #{record.mPhone,jdbcType=BIGINT},
+      </if>
+      <if test="record.mSpecial != null" >
+        m_special = #{record.mSpecial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mActive != null" >
+        m_active = #{record.mActive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mDate != null" >
+        m_date = #{record.mDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mPrice != null" >
+        m_price = #{record.mPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mPid != null" >
+        m_pid = #{record.mPid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update merchant
+    set m_id = #{record.mId,jdbcType=BIGINT},
+      m_name = #{record.mName,jdbcType=VARCHAR},
+      m_photo = #{record.mPhoto,jdbcType=VARCHAR},
+      m_address = #{record.mAddress,jdbcType=VARCHAR},
+      m_phone = #{record.mPhone,jdbcType=BIGINT},
+      m_special = #{record.mSpecial,jdbcType=VARCHAR},
+      m_active = #{record.mActive,jdbcType=VARCHAR},
+      m_date = #{record.mDate,jdbcType=TIMESTAMP},
+      m_price = #{record.mPrice,jdbcType=DECIMAL},
+      m_pid = #{record.mPid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.campus.order.domain.Merchant" >
+    update merchant
+    <set >
+      <if test="mName != null" >
+        m_name = #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mPhoto != null" >
+        m_photo = #{mPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="mAddress != null" >
+        m_address = #{mAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mPhone != null" >
+        m_phone = #{mPhone,jdbcType=BIGINT},
+      </if>
+      <if test="mSpecial != null" >
+        m_special = #{mSpecial,jdbcType=VARCHAR},
+      </if>
+      <if test="mActive != null" >
+        m_active = #{mActive,jdbcType=VARCHAR},
+      </if>
+      <if test="mDate != null" >
+        m_date = #{mDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mPrice != null" >
+        m_price = #{mPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="mPid != null" >
+        m_pid = #{mPid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where m_id = #{mId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.campus.order.domain.Merchant" >
+    update merchant
+    set m_name = #{mName,jdbcType=VARCHAR},
+      m_photo = #{mPhoto,jdbcType=VARCHAR},
+      m_address = #{mAddress,jdbcType=VARCHAR},
+      m_phone = #{mPhone,jdbcType=BIGINT},
+      m_special = #{mSpecial,jdbcType=VARCHAR},
+      m_active = #{mActive,jdbcType=VARCHAR},
+      m_date = #{mDate,jdbcType=TIMESTAMP},
+      m_price = #{mPrice,jdbcType=DECIMAL},
+      m_pid = #{mPid,jdbcType=BIGINT}
+    where m_id = #{mId,jdbcType=BIGINT}
+  </update>
+</mapper>

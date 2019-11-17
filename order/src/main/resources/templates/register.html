@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8" />
+ <title>注册</title>
+ <meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发" />
+ <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
+ <meta name="author" content="DeathGhost"/>
+ <link th:href="@{~/style/style.css}" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" th:src="@{~/js/public.js}"></script>
+ <script type="text/javascript" th:src="@{~/js/jquery.js}"></script>
+ <script type="text/javascript" th:src="@{~/js/jqpublic.js}"></script>
+ <script type="text/javascript" th:src="@{~/js/jquery-3.3.1.min.js}"></script>
+</head>
+<body>
+<header>
+ <div class="Logo_search">
+  <div class="Logo">
+   <img src="images/logo2.jpg">
+   <i></i>
+   <span>天津市大学软件学院</span>
+  </div>
+  <div class="Search">
+  </div>
+ </div>
+ <nav class="menu_bg">
+  <ul class="menu">
+   <li style="font-size: x-large">嗨，好久不见，赶快订餐吧！</li>
+  </ul>
+ </nav>
+</header>
+<!--Start content-->
+<section class="Psection MT20">
+ <form id="myForm" name="form" >
+  <table class="Register">
+   <tr>
+    <td width="40%" align="right" class="FontW">用户名：</td>
+    <td><input type="text"  name="uName" id="uName" required autofocus><span id="showMsgName"></span> </td>
+   </tr>
+   <tr>
+    <td width="40%" align="right" class="FontW">密码：</td>
+    <td><input type="password" name="uPwd" id="uPwd" required></td>
+   </tr>
+   <tr>
+    <td width="40%" align="right" class="FontW">再次确认：</td>
+    <td><input type="password" name="uPwd2" id="uPwd2" required pattern="^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$" /></td>
+   </tr>
+   <tr>
+    <td width="40%" align="right" class="FontW">电子邮件：</td>
+    <td><input type="email" name="email" id="email" required><span id="showMsgEmail"></span></td>
+   </tr>
+   <tr>
+    <td width="40%" align="right" class="FontW">手机号码：</td>
+    <td><input type="text" name="uPhone" id="uPhone" required pattern="^1[34578]\d{9}$" /><span id="showMsgPhone"></span></td>
+   </tr>
+   <tr>
+    <td width="40%" align="right"></td>
+    <td><button type="submit" value="注 册" onclick="checkData()" >注 册</button>( 我已注册，<a th:href="@{/login}" class="BlueA">去登录</ a> )
+    </td>
+   </tr>
+  </table>
+ </form>
+</section>
+<div th:replace="footer :: footer"></div>
+<script th:inline="javascript" type="text/javascript">
+ function checkData() {
+  //1.获取用户名、密码、确认密码
+  var uName = document.getElementById("uName");
+  var uPwd = document.getElementById("uPwd");
+  var uPwd2 = document.getElementById("uPwd2");
+
+  //2.判断两次密码是否一样
+  if (uPwd.value != null && uPwd.value == uPwd2.value && checkName() && checkEmail() && checkPhone()){
+   document.form.method= "post";
+   document.form.action= "/registeruser";
+   document.form.submit();
+   return   true;
+  } else {
+   alert("输入有误");
+   //window.location.href = "/register";
+  }
+
+ }
+ $(function(){
+  $("#myForm").on("submit",check);
+  $("#uName").on("blur",checkName);
+  $("#email").on("blur",checkEmail);
+  $("#uPhone").on("blur",checkPhone);
+ });
+
+ function check(){
+  return checkName() && checkEmail();// && checkPhone();
+ }
+
+ function checkName(){
+  var b=false;
+  var uName=$("#uName").val();
+  if(uName.length<2 || uName.length>12){
+   $("#showMsgName").text("用户名必须2~12位").css("color","red");
+  }else{
+   $("#showMsgName").text("用户名可用").css("color","green");
+   b=true;
+  }
+  return b;
+ }
+
+
+ function checkEmail(){
+  var re=/^[A-Za-z\d]+([-_][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+  var b=false;
+  var email=$("#email").val()
+  if(email.indexOf("@")<0){
+   $("#showMsgEmail").text("邮箱必须包含@").css("color","red");
+  }else if(email.indexOf(".")<0){
+   $("#showMsgEmail").text("邮箱必须包含.").css("color","red");
+  }else if(email.indexOf("@")>email.indexOf(".")){
+   $("#showMsgEmail").text("邮箱中的。必须在@号之后").css("color","red");
+  }else{
+   $("#showMsgEmail").text("邮箱可用").css("color","green");
+   b=true;
+  }
+  return b;
+ }
+
+ function checkPhone() {
+  var re = /^1[34578]\d{9}$/;
+  var b = f
+ }
+</script>
+</body>
+</html>

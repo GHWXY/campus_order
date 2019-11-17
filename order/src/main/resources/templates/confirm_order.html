@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>确认订单</title>
+ <meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发" />
+ <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
+ <meta name="author" content="DeathGhost"/>
+ <link th:href="@{~/style/style.css}" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" th:src="@{~/js/public.js}"></script>
+ <script type="text/javascript" th:src="@{~/js/jquery.js}"></script>
+ <script type="text/javascript" th:src="@{~/js/jqpublic.js}"></script>
+</head>
+<body>
+<div th:include="header :: header"></div>
+<!--Start content-->
+
+<section class="Psection MT20" id="Cflow">
+<!--如果用户未添加收货地址，则显示如下-->
+ <form th:action="@{/finall}">
+  <input type="hidden" name="uid" th:value="${session.userInfo.getuId()}">
+  <input type="hidden" name="fType" value="送货上门">
+  <input type="hidden" name="fSum" th:value="${sum}">
+ <div class="confirm_addr_f">
+  <span class="flow_title">收货地址：</span>
+  <!--如果未添加地址，则显示此表单-->
+
+  <!--已保存的地址列表-->
+  <form action="#">
+   <ul class="address" >
+    <li id="style1" th:each="addrlist:${addr}">
+     <input type="radio" value="1" id="1" name="rdcolor" onclick="changeColor(1)"/>
+     <label for="1" th:text="${addrlist.getAinfo()}+${addrlist.getAzone()}+'（'+${addrlist.getAuname()}+'收'+'）'"> 浙江省 杭州市 余杭区 航海路1588号（孙先生收）</label>
+     <span class="fontcolor"th:text="${addrlist.getAuphone()}"></span>
+    </li>
+    <li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img src="images/newaddress.png"/></a></li>
+   </ul>
+   </form>
+   <!--add new address-->
+   <form th:action="@{/address}">
+    <input name="uid" type="hidden" th:value="${session.userInfo.getuId()}">
+   <div id="light" class="O-L-content">
+    <ul>
+     <li>
+      <span><label for="">收件人姓名：</label></span>
+      <p><em>*</em><input name="auname" type="text"></p>
+     </li>
+     <li>
+      <span><label for="">手机号码：</label></span>
+      <p><em>*</em><input name="auphone" type="text" pattern="[0-9]{11}" required></p>
+     </li>
+     <li>
+      <span><label for="">选择所在地：</label></span>
+      <p><em>*</em>
+      <select name="azone" class="select_ssq">
+       <option>教学区A</option>
+       <option>教学区B</option>
+       <option>教学区C</option>
+       <option>教学区D</option>
+       <option>生活区1</option>
+       <option>生活区2</option>
+       <option>生活区3</option>
+       <option>生活区4</option>
+     </select></p></li>
+     <li>
+      <span><label for="">详细地址：</label></span>
+      <p><em>*</em><textarea name="ainfo" cols="80" rows="5"></textarea></p>
+     </li>
+     <div class="button-a">
+      <button type="submit" value="确 定" class="C-button" >确 定</button>
+      <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+       <span>
+        <button name="" type="button" value="取 消"  class="Cancel-b">取 消</button>
+       </span>
+      </a>
+     </div>
+    <div class="close-botton">
+     <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></a>
+    </div>
+    </ul>
+   </div>
+   <div id="fade" class="overlay"></div>
+    </ul>
+   </form>
+<!--配送方式及支付，则显示如下-->
+<!--check order or add other information-->
+ <div class="pay_delivery">
+  <span class="flow_title">配送方式：</span>
+  <table>
+   <th width="30%">配送方式</th>
+   <th width="30%">运费</th>
+   <tr>
+    <td>送货上门</td>
+    <td>￥2.00</td>
+   </tr>
+  </table>
+  <span class="flow_title">在线支付方式：</span>
+   <form action="#">
+    <ul>
+    <li><input type="radio" name="pay" id="alipay" value="2" /><label for="alipay"><i class="alipay"></i></label></li>
+    </ul>
+   </form>
+  </div>
+
+  <div class="inforlist">
+   <span class="flow_title">订单附言</span>
+    <div class="Order_M">
+     <p><em>订单附言:</em><input name="fText"  type="text"></p>
+    </div>
+    <div class="Sum_infor">
+    <p class="p2">合计：<span th:text="${sum}">￥167.00</span><em>（加运费）</em></p>
+    <input type="submit" value="提交订单" class="p3button">
+    </div>
+   </div>
+ </div>
+ </form>
+</section>
+<script>
+//Test code,You can delete this script /2014-9-21DeathGhost/
+/*$(document).ready(function(){
+ var submitorder =$.noConflict();
+ submitorder(".p3button").click(function(){
+	 submitorder("#Cflow").hide();
+	 submitorder("#Aflow").show();
+	 });
+});*/
+</script>
+<!--<section class="Psection MT20 Textcenter" style="display:none;" id="Aflow">
+  &lt;!&ndash; 订单提交成功后则显示如下 &ndash;&gt;
+  <p class="Font14 Lineheight35 FontW">恭喜你！订单提交成功！</p>
+  <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed">201409205134</span></p>
+  <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed" th:text="${sum}">￥359</span></p>
+  <p><button type="button" class="Lineheight35"><a href="#" target="_blank">支付宝立即支付</a></button><button type="button" class="Lineheight35"><a href="user_center.html">进入用户中心</button></p>
+</section>-->
+<!--End content-->
+<div class="F-link"></div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

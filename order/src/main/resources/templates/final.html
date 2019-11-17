@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>提交确认订单</title>
+    <meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发" />
+    <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
+    <meta name="author" content="DeathGhost"/>
+    <link th:href="@{~/style/style.css}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" th:src="@{~/js/public.js}"></script>
+    <script type="text/javascript" th:src="@{~/js/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{~/js/jqpublic.js}"></script>
+</head>
+<body>
+<div th:include="header :: header"></div>
+
+<section >
+    <!-- 订单提交成功后则显示如下 -->
+    <p class="Font14 Lineheight35 FontW" align="center">恭喜你！订单提交成功！</p>
+    <p class="Font14 Lineheight35 FontW" align="center">您的订单编号为：<span class="CorRed">201409205134</span></p>
+    <p class="Font14 Lineheight35 FontW" align="center">共计金额：<span class="CorRed" th:text="${sum}"></span></p>
+    <p align="center"><button type="button" class="Lineheight35"><a href="#" target="_blank">支付宝立即支付</a></button><button type="button" class="Lineheight35"><a th:href="@{/usercenter}">进入用户中心</button></p>
+</section>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

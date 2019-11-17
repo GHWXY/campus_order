@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.campus.order.mapper.CollectMapper" >
+  <resultMap id="BaseResultMap" type="com.campus.order.domain.Collect" >
+    <id column="s_id" property="sId" jdbcType="BIGINT" />
+    <result column="s_name" property="sName" jdbcType="VARCHAR" />
+    <result column="s_photo" property="sPhoto" jdbcType="VARCHAR" />
+    <result column="s_mid" property="sMid" jdbcType="BIGINT" />
+    <result column="s_uid" property="sUid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    s_id, s_name, s_photo, s_mid, s_uid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.campus.order.domain.CollectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    group by s_name
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from collect
+    where s_id = #{sId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from collect
+    where s_id = #{sId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.campus.order.domain.CollectExample" >
+    delete from collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.campus.order.domain.Collect" >
+    insert into collect (s_id, s_name, s_photo, 
+      s_mid, s_uid)
+    values (#{sId,jdbcType=BIGINT}, #{sName,jdbcType=VARCHAR}, #{sPhoto,jdbcType=VARCHAR}, 
+      #{sMid,jdbcType=BIGINT}, #{sUid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.campus.order.domain.Collect" >
+    insert into collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        s_id,
+      </if>
+      <if test="sName != null" >
+        s_name,
+      </if>
+      <if test="sPhoto != null" >
+        s_photo,
+      </if>
+      <if test="sMid != null" >
+        s_mid,
+      </if>
+      <if test="sUid != null" >
+        s_uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        #{sId,jdbcType=BIGINT},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sPhoto != null" >
+        #{sPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sMid != null" >
+        #{sMid,jdbcType=BIGINT},
+      </if>
+      <if test="sUid != null" >
+        #{sUid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.campus.order.domain.CollectExample" resultType="java.lang.Integer" >
+    select count(*) from collect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update collect
+    <set >
+      <if test="record.sId != null" >
+        s_id = #{record.sId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sName != null" >
+        s_name = #{record.sName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sPhoto != null" >
+        s_photo = #{record.sPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sMid != null" >
+        s_mid = #{record.sMid,jdbcType=BIGINT},
+      </if>
+      <if test="record.sUid != null" >
+        s_uid = #{record.sUid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update collect
+    set s_id = #{record.sId,jdbcType=BIGINT},
+      s_name = #{record.sName,jdbcType=VARCHAR},
+      s_photo = #{record.sPhoto,jdbcType=VARCHAR},
+      s_mid = #{record.sMid,jdbcType=BIGINT},
+      s_uid = #{record.sUid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.campus.order.domain.Collect" >
+    update collect
+    <set >
+      <if test="sName != null" >
+        s_name = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sPhoto != null" >
+        s_photo = #{sPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sMid != null" >
+        s_mid = #{sMid,jdbcType=BIGINT},
+      </if>
+      <if test="sUid != null" >
+        s_uid = #{sUid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.campus.order.domain.Collect" >
+    update collect
+    set s_name = #{sName,jdbcType=VARCHAR},
+      s_photo = #{sPhoto,jdbcType=VARCHAR},
+      s_mid = #{sMid,jdbcType=BIGINT},
+      s_uid = #{sUid,jdbcType=BIGINT}
+    where s_id = #{sId,jdbcType=BIGINT}
+  </update>
+</mapper>

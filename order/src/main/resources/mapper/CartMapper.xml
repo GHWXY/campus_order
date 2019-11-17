@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.campus.order.mapper.CartMapper" >
+  <resultMap id="BaseResultMap" type="com.campus.order.domain.Cart" >
+    <id column="cid" property="cid" jdbcType="BIGINT" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="cpicon" property="cpicon" jdbcType="VARCHAR" />
+    <result column="cprice" property="cprice" jdbcType="DOUBLE" />
+    <result column="cnumber" property="cnumber" jdbcType="BIGINT" />
+    <result column="cuprice" property="cuprice" jdbcType="DOUBLE" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="cinfo" property="cinfo" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="mname" property="mname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cid, cname, cpicon, cprice, cnumber, cuprice, pid, cinfo, uid, mname
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.campus.order.domain.CartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    group by cname
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where cid = #{cid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cart
+    where cid = #{cid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.campus.order.domain.CartExample" >
+    delete from cart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.campus.order.domain.Cart" >
+    insert into cart (cid, cname, cpicon, 
+      cprice, cnumber, cuprice, 
+      pid, cinfo, uid, mname
+      )
+    values (#{cid,jdbcType=BIGINT}, #{cname,jdbcType=VARCHAR}, #{cpicon,jdbcType=VARCHAR}, 
+      #{cprice,jdbcType=DOUBLE}, #{cnumber,jdbcType=BIGINT}, #{cuprice,jdbcType=DOUBLE}, 
+      #{pid,jdbcType=BIGINT}, #{cinfo,jdbcType=VARCHAR}, #{uid,jdbcType=BIGINT}, #{mname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.campus.order.domain.Cart" >
+    insert into cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="cpicon != null" >
+        cpicon,
+      </if>
+      <if test="cprice != null" >
+        cprice,
+      </if>
+      <if test="cnumber != null" >
+        cnumber,
+      </if>
+      <if test="cuprice != null" >
+        cuprice,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="cinfo != null" >
+        cinfo,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="mname != null" >
+        mname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        #{cid,jdbcType=BIGINT},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cpicon != null" >
+        #{cpicon,jdbcType=VARCHAR},
+      </if>
+      <if test="cprice != null" >
+        #{cprice,jdbcType=DOUBLE},
+      </if>
+      <if test="cnumber != null" >
+        #{cnumber,jdbcType=BIGINT},
+      </if>
+      <if test="cuprice != null" >
+        #{cuprice,jdbcType=DOUBLE},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="cinfo != null" >
+        #{cinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="mname != null" >
+        #{mname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.campus.order.domain.CartExample" resultType="java.lang.Integer" >
+    select count(*) from cart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cart
+    <set >
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=BIGINT},
+      </if>
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpicon != null" >
+        cpicon = #{record.cpicon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cprice != null" >
+        cprice = #{record.cprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cnumber != null" >
+        cnumber = #{record.cnumber,jdbcType=BIGINT},
+      </if>
+      <if test="record.cuprice != null" >
+        cuprice = #{record.cuprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=BIGINT},
+      </if>
+      <if test="record.cinfo != null" >
+        cinfo = #{record.cinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.mname != null" >
+        mname = #{record.mname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cart
+    set cid = #{record.cid,jdbcType=BIGINT},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      cpicon = #{record.cpicon,jdbcType=VARCHAR},
+      cprice = #{record.cprice,jdbcType=DOUBLE},
+      cnumber = #{record.cnumber,jdbcType=BIGINT},
+      cuprice = #{record.cuprice,jdbcType=DOUBLE},
+      pid = #{record.pid,jdbcType=BIGINT},
+      cinfo = #{record.cinfo,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=BIGINT},
+      mname = #{record.mname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.campus.order.domain.Cart" >
+    update cart
+    <set >
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cpicon != null" >
+        cpicon = #{cpicon,jdbcType=VARCHAR},
+      </if>
+      <if test="cprice != null" >
+        cprice = #{cprice,jdbcType=DOUBLE},
+      </if>
+      <if test="cnumber != null" >
+        cnumber = #{cnumber,jdbcType=BIGINT},
+      </if>
+      <if test="cuprice != null" >
+        cuprice = #{cuprice,jdbcType=DOUBLE},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="cinfo != null" >
+        cinfo = #{cinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="mname != null" >
+        mname = #{mname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.campus.order.domain.Cart" >
+    update cart
+    set cname = #{cname,jdbcType=VARCHAR},
+      cpicon = #{cpicon,jdbcType=VARCHAR},
+      cprice = #{cprice,jdbcType=DOUBLE},
+      cnumber = #{cnumber,jdbcType=BIGINT},
+      cuprice = #{cuprice,jdbcType=DOUBLE},
+      pid = #{pid,jdbcType=BIGINT},
+      cinfo = #{cinfo,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=BIGINT},
+      mname = #{mname,jdbcType=VARCHAR}
+    where cid = #{cid,jdbcType=BIGINT}
+  </update>
+</mapper>

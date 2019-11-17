@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.campus.order.mapper.FinalMapper" >
+  <resultMap id="BaseResultMap" type="com.campus.order.domain.Final" >
+    <id column="f_id" property="fId" jdbcType="BIGINT" />
+    <result column="f_address" property="fAddress" jdbcType="VARCHAR" />
+    <result column="f_type" property="fType" jdbcType="VARCHAR" />
+    <result column="pay" property="pay" jdbcType="VARCHAR" />
+    <result column="f_text" property="fText" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="f_sum" property="fSum" jdbcType="DOUBLE" />
+    <result column="rdColor" property="rdcolor" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    f_id, f_address, f_type, pay, f_text, uid, f_sum, rdColor
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.campus.order.domain.FinalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from final
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from final
+    where f_id = #{fId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from final
+    where f_id = #{fId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.campus.order.domain.FinalExample" >
+    delete from final
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.campus.order.domain.Final" >
+    insert into final (f_id, f_address, f_type, 
+      pay, f_text, uid, f_sum, 
+      rdColor)
+    values (#{fId,jdbcType=BIGINT}, #{fAddress,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, 
+      #{pay,jdbcType=VARCHAR}, #{fText,jdbcType=VARCHAR}, #{uid,jdbcType=BIGINT}, #{fSum,jdbcType=DOUBLE}, 
+      #{rdcolor,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.campus.order.domain.Final" >
+    insert into final
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        f_id,
+      </if>
+      <if test="fAddress != null" >
+        f_address,
+      </if>
+      <if test="fType != null" >
+        f_type,
+      </if>
+      <if test="pay != null" >
+        pay,
+      </if>
+      <if test="fText != null" >
+        f_text,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="fSum != null" >
+        f_sum,
+      </if>
+      <if test="rdcolor != null" >
+        rdColor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        #{fId,jdbcType=BIGINT},
+      </if>
+      <if test="fAddress != null" >
+        #{fAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null" >
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="pay != null" >
+        #{pay,jdbcType=VARCHAR},
+      </if>
+      <if test="fText != null" >
+        #{fText,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="fSum != null" >
+        #{fSum,jdbcType=DOUBLE},
+      </if>
+      <if test="rdcolor != null" >
+        #{rdcolor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.campus.order.domain.FinalExample" resultType="java.lang.Integer" >
+    select count(*) from final
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update final
+    <set >
+      <if test="record.fId != null" >
+        f_id = #{record.fId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fAddress != null" >
+        f_address = #{record.fAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fType != null" >
+        f_type = #{record.fType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pay != null" >
+        pay = #{record.pay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fText != null" >
+        f_text = #{record.fText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fSum != null" >
+        f_sum = #{record.fSum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rdcolor != null" >
+        rdColor = #{record.rdcolor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update final
+    set f_id = #{record.fId,jdbcType=BIGINT},
+      f_address = #{record.fAddress,jdbcType=VARCHAR},
+      f_type = #{record.fType,jdbcType=VARCHAR},
+      pay = #{record.pay,jdbcType=VARCHAR},
+      f_text = #{record.fText,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=BIGINT},
+      f_sum = #{record.fSum,jdbcType=DOUBLE},
+      rdColor = #{record.rdcolor,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.campus.order.domain.Final" >
+    update final
+    <set >
+      <if test="fAddress != null" >
+        f_address = #{fAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null" >
+        f_type = #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="pay != null" >
+        pay = #{pay,jdbcType=VARCHAR},
+      </if>
+      <if test="fText != null" >
+        f_text = #{fText,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="fSum != null" >
+        f_sum = #{fSum,jdbcType=DOUBLE},
+      </if>
+      <if test="rdcolor != null" >
+        rdColor = #{rdcolor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.campus.order.domain.Final" >
+    update final
+    set f_address = #{fAddress,jdbcType=VARCHAR},
+      f_type = #{fType,jdbcType=VARCHAR},
+      pay = #{pay,jdbcType=VARCHAR},
+      f_text = #{fText,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=BIGINT},
+      f_sum = #{fSum,jdbcType=DOUBLE},
+      rdColor = #{rdcolor,jdbcType=VARCHAR}
+    where f_id = #{fId,jdbcType=BIGINT}
+  </update>
+</mapper>

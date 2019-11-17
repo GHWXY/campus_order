@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>首页</title>
+<meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发" />
+<meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
+<meta name="author" content="DeathGhost"/>
+<link th:href="@{~/style/style.css}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" th:src="@{~/js/public.js}"></script>
+<script type="text/javascript" th:src="@{~/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{~/js/jqpublic.js}"></script>
+</head>
+
+<body>
+<div th:include="header :: header"></div>
+<!--Start content-->
+<section class="Cfn">
+ <aside class="C-left">
+  <div class="S-time">服务时间：周一~周六<time>09:00</time>-<time>23:00</time></div>
+  <div class="C-time">
+   <img src="upload/dc.jpg"/>
+  </div>
+  <a th:href="@{/list}" target="_blank"><img src="images/by_button.png"></a>
+  <a th:href="@{/list}" target="_blank"><img src="images/dc_button.png"></a>
+ </aside>
+ <div class="F-middle">
+ <ul class="rslides f426x240">
+        <li><a href="javascript:"><img style="width: 600px;height: 400px" src="images/sql/1014-1PF31I441M0.jpg"/></a></li>
+        <li><a href="javascript:"><img src="images/sql/1509691429.jpg!294x.jpg" /></a></li>
+        <li><a href="javascript:"><img style="width: 600px;height: 400px" src="images/sql/1509964641.jpg!294x.jpg"/></a></li>
+        <li><a href="javascript:"><img style="width: 600px;height: 400px" src="images/sql/1509692818.jpg!294x.jpg"/></a></li>
+        <li><a href="javascript:"><img style="width: 600px;height: 400px" src="images/sql/1518086565.jpg!294x.jpg"/></a></li>
+        <li><a href="javascript:"><img style="width: 600px;height: 400px" src="images/sql/1518086568.jpg!294x.jpg"/></a></li>
+    </ul>
+ </div>
+ <aside class="N-right">
+  <div class="N-title">公司新闻 <i>COMPANY NEWS</i></div>
+  <ul class="Newslist">
+   <li><i></i><a th:href="@{/articleread}" target="_blank" title="这里调用新闻标题...">欢迎了解天软订餐系统</a></li>
+   <li><i></i><a th:href="@{/articleread}" target="_blank" title="这里调用新闻标题...">欢迎进入天软订餐系统</a></li>
+  </ul>
+  <ul class="Orderlist" id="UpRoll">
+   <li>
+   <p>订单编号：2014090912973</p>
+   <p>收件人：王鑫钰</p>
+   <p>订单状态：<i class="State01">已发货</i></p>
+   </li>
+   <li>
+   <p>订单编号：2014090912978</p>
+   <p>收件人：敬思</p>
+   <p>订单状态：<i class="State02">已签收</i><i class="State03">已点评</i></p>
+   </li>
+   <li>
+   <p>订单编号：2014090912988</p>
+   <p>收件人：代阿宝</p>
+   <p>订单状态：<i class="State02">已签收</i><i class="State03">已点评</i></p>
+   </li>
+  </ul>
+  <script>
+   var UpRoll = document.getElementById('UpRoll');
+   var lis = UpRoll.getElementsByTagName('li');
+   var ml = 0;
+   var timer1 = setInterval(function(){
+    var liHeight = lis[0].offsetHeight;
+    var timer2 = setInterval(function(){
+     UpRoll.scrollTop = (++ml);
+     if(ml ==1){
+        clearInterval(timer2);
+        UpRoll.scrollTop = 0;
+        ml = 0;
+        lis[0].parentNode.appendChild(lis[0]);
+    }
+    },10); 
+    },5000);
+  </script>
+ </aside>
+</section>
+<section class="Sfainfor">
+ <article class="Sflist">
+  <div id="Indexouter">
+   <ul id="Indextab">
+    <li class="current">订餐</li>
+    <li>窗口</li>
+   </ul>
+  <div id="Indexcontent">
+   <ul style="display:block;">
+    <li>
+     <div class="SCcontent">
+     <a th:href="@{/detailsp1(pid=2)}" target="_blank" title="香辣虾便当" >
+      <figure >
+       <img src="/images/sql/1501497993.jpg!294x.jpg">
+       <figcaption>
+       <span class="title"> 香辣虾便当</span>
+       <span class="price"><i>￥</i>10.00</span>
+       </figcaption>
+      </figure>
+      </a>
+     <a th:href="@{/detailsp2(pid=9)}" target="_blank" title="黄焖排骨">
+      <figure>
+       <img src="/images/sql/1499237033.jpg!294x.jpg">
+       <figcaption>
+       <span class="title">黄焖排骨</span>
+       <span class="price"><i>￥</i>14.00</span>
+       </figcaption>
+      </figure>
+      </a>
+     <a th:href="@{/detailsp3(pid=17)}" target="_blank" title="石锅拌饭">
+      <figure>
+       <img src="/images/sql/1514865321.jpg!294x.jpg">
+       <figcaption>
+       <span class="title">石锅拌饭</span>
+       <span class="price"><i>￥</i>10.00</span>
+       </figcaption>
+      </figure>
+      </a>
+     </div>
+     <div class="bestshop">
+      <a th:href="@{/shop1(mid=1)}" target="_blank" title="便当">
+      <figure>
+       <img src="images/shop/biandang.jpg">
+      </figure>
+      </a>
+      <a th:href="@{/shop2(mid=2)}" target="_blank" title="饺子">
+      <figure>
+       <img src="images/shop/jiaozi.jpg">
+      </figure>
+      </a>
+      <a th:href="@{/shop3(mid=3)}" target="_blank" title="面">
+      <figure>
+       <img src="images/shop/mian.jpg">
+      </figure>
+      </a>
+      <a th:href="@{/shop4(mid=4)}" target="_blank" title="奶茶">
+      <figure>
+       <img src="images/shop/naicha.jpg">
+      </figure>
+      </a>
+      <a th:href="@{/shop5(mid=5)}" target="_blank" title="早饭">
+      <figure>
+       <img src="images/shop/zaofan.jpg">
+      </figure>
+      </a>
+     </div>
+    </li>
+   </ul>
+   <ul>
+  <li>
+     <div class="DCcontent">
+       <a th:href="@{/shop6(mid=6)}" target="_blank" title="黄焖鸡米饭">
+       <figure>
+       <img src="images/shop/huangmenji.jpg">
+       <figcaption>
+       <span class="title">黄焖鸡米饭</span>
+       <span class="price">预定折扣：<i>8.9折</i></span>
+       </figcaption>
+       <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
+       <p class="p2">
+       店铺评分：
+       <img src="images/star-on.png">
+       <img src="images/star-on.png">
+       <img src="images/star-on.png">
+       <img src="images/star-on.png">
+       <img src="images/star-off.png">
+       </p>
+       <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
+       </figure>
+      </a>
+       <a th:href="@{/shop7(mid=7)}" target="_blank" title="汉堡">
+       <figure>
+       <img src="images/shop/hanbao.jpg">
+       <figcaption>
+       <span class="title">汉堡</span>
+       <span class="price">预定折扣：<i>8.9折</i></span>
+       </figcaption>
+       <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
+       <p class="p2">
+       店铺评分：
+       <img src="images/star-on.png">
+       <img src="images/star-on.png">
+       <img src="images/star-on.png">
+       <img src="images/star-on.png">
+       <img src="images/star-off.png">
+       </p>
+       <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
+       </figure>
+      </a>
+       <a th:href="@{/shop8(mid=8)}" target="_blank" title="石锅拌饭">
+       <figure>
+       <img src="images/shop/shiguobanfan.png">
+       <figcaption>
+       <span class="title">石锅拌饭</span>
+       <span class="price">预定折扣：<i>8.9折</i></span>
+       </figcaption>
+       <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
+       <p class="p2">
+       店铺评分：
+       <img src="images/star-on.png">
+       <img src="images/star-on.png">
+       <img src="images/star-on.png">
+       <img src="images/star-on.png">
+       <img src="images/star-off.png">
+       </p>
+       <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
+       </figure>
+      </a>
+      <a th:href="@{/shop9(mid=9)}" target="_blank" title="水果捞">
+       <figure>
+        <img src="images/shop/shuiguolao.jpg">
+        <figcaption>
+         <span class="title">水果捞</span>
+         <span class="price">预定折扣：<i>8.9折</i></span>
+        </figcaption>
+        <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
+        <p class="p2">
+         店铺评分：
+         <img src="images/star-on.png">
+         <img src="images/star-on.png">
+         <img src="images/star-on.png">
+         <img src="images/star-on.png">
+         <img src="images/star-off.png">
+        </p>
+        <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
+       </figure>
+      </a>
+      <a th:href="@{/shop10(mid=10)}" target="_blank" title="粥">
+       <figure>
+        <img src="images/shop/zhou.jpg">
+        <figcaption>
+         <span class="title">粥</span>
+         <span class="price">预定折扣：<i>8.9折</i></span>
+        </figcaption>
+        <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
+        <p class="p2">
+         店铺评分：
+         <img src="images/star-on.png">
+         <img src="images/star-on.png">
+         <img src="images/star-on.png">
+         <img src="images/star-on.png">
+         <img src="images/star-off.png">
+        </p>
+        <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
+       </figure>
+      </a>
+      <a th:href="@{/shop3(mid=3)}" target="_blank" title="TITLE:店名">
+       <figure>
+        <img src="images/shop/mian.jpg">
+        <figcaption>
+         <span class="title">老重庆川菜馆</span>
+         <span class="price">预定折扣：<i>8.9折</i></span>
+        </figcaption>
+        <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
+        <p class="p2">
+         店铺评分：
+         <img src="images/star-on.png">
+         <img src="images/star-on.png">
+         <img src="images/star-on.png">
+         <img src="images/star-on.png">
+         <img src="images/star-off.png">
+        </p>
+        <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
+       </figure>
+      </a>
+     </div>
+  </li>
+  </ul>
+ </div>
+ </div>
+ </article>
+ <aside class="A-infor">
+  <img src="upload/2014911.jpg">
+  <div class="usercomment">
+   <span>用户菜品点评</span>
+   <ul>
+    <li>
+     <img src="images/sql/1499237033.jpg!294x.jpg">
+     用户评说：味道挺不错，送餐速度挺快...
+    </li>
+    <li>
+     <img src="images/sql/1509690727.jpg!294x.jpg">
+     用户评说：味道挺不错，送餐速度挺快...
+    </li>
+   </ul>
+  </div>
+ </aside>
+</section>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

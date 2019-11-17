@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.campus.order.mapper.SettlementMapper" >
+  <resultMap id="BaseResultMap" type="com.campus.order.domain.Settlement" >
+    <id column="s_id" property="sId" jdbcType="BIGINT" />
+    <result column="s_checkbox" property="sCheckbox" jdbcType="VARCHAR" />
+    <result column="s_piocn" property="sPiocn" jdbcType="VARCHAR" />
+    <result column="s_cname" property="sCname" jdbcType="VARCHAR" />
+    <result column="s_cuxiao" property="sCuxiao" jdbcType="DECIMAL" />
+    <result column="s_count" property="sCount" jdbcType="BIGINT" />
+    <result column="s_price" property="sPrice" jdbcType="DECIMAL" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="s_numberw" property="sNumberw" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    s_id, s_checkbox, s_piocn, s_cname, s_cuxiao, s_count, s_price, uid, s_numberw
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.campus.order.domain.SettlementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from settlement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from settlement
+    where s_id = #{sId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from settlement
+    where s_id = #{sId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.campus.order.domain.SettlementExample" >
+    delete from settlement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.campus.order.domain.Settlement" >
+    insert into settlement (s_id, s_checkbox, s_piocn, 
+      s_cname, s_cuxiao, s_count, 
+      s_price, uid, s_numberw
+      )
+    values (#{sId,jdbcType=BIGINT}, #{sCheckbox,jdbcType=VARCHAR}, #{sPiocn,jdbcType=VARCHAR}, 
+      #{sCname,jdbcType=VARCHAR}, #{sCuxiao,jdbcType=DECIMAL}, #{sCount,jdbcType=BIGINT}, 
+      #{sPrice,jdbcType=DECIMAL}, #{uid,jdbcType=BIGINT}, #{sNumberw,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.campus.order.domain.Settlement" >
+    insert into settlement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        s_id,
+      </if>
+      <if test="sCheckbox != null" >
+        s_checkbox,
+      </if>
+      <if test="sPiocn != null" >
+        s_piocn,
+      </if>
+      <if test="sCname != null" >
+        s_cname,
+      </if>
+      <if test="sCuxiao != null" >
+        s_cuxiao,
+      </if>
+      <if test="sCount != null" >
+        s_count,
+      </if>
+      <if test="sPrice != null" >
+        s_price,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="sNumberw != null" >
+        s_numberw,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        #{sId,jdbcType=BIGINT},
+      </if>
+      <if test="sCheckbox != null" >
+        #{sCheckbox,jdbcType=VARCHAR},
+      </if>
+      <if test="sPiocn != null" >
+        #{sPiocn,jdbcType=VARCHAR},
+      </if>
+      <if test="sCname != null" >
+        #{sCname,jdbcType=VARCHAR},
+      </if>
+      <if test="sCuxiao != null" >
+        #{sCuxiao,jdbcType=DECIMAL},
+      </if>
+      <if test="sCount != null" >
+        #{sCount,jdbcType=BIGINT},
+      </if>
+      <if test="sPrice != null" >
+        #{sPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="sNumberw != null" >
+        #{sNumberw,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.campus.order.domain.SettlementExample" resultType="java.lang.Integer" >
+    select count(*) from settlement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update settlement
+    <set >
+      <if test="record.sId != null" >
+        s_id = #{record.sId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sCheckbox != null" >
+        s_checkbox = #{record.sCheckbox,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sPiocn != null" >
+        s_piocn = #{record.sPiocn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sCname != null" >
+        s_cname = #{record.sCname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sCuxiao != null" >
+        s_cuxiao = #{record.sCuxiao,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sCount != null" >
+        s_count = #{record.sCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.sPrice != null" >
+        s_price = #{record.sPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.sNumberw != null" >
+        s_numberw = #{record.sNumberw,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update settlement
+    set s_id = #{record.sId,jdbcType=BIGINT},
+      s_checkbox = #{record.sCheckbox,jdbcType=VARCHAR},
+      s_piocn = #{record.sPiocn,jdbcType=VARCHAR},
+      s_cname = #{record.sCname,jdbcType=VARCHAR},
+      s_cuxiao = #{record.sCuxiao,jdbcType=DECIMAL},
+      s_count = #{record.sCount,jdbcType=BIGINT},
+      s_price = #{record.sPrice,jdbcType=DECIMAL},
+      uid = #{record.uid,jdbcType=BIGINT},
+      s_numberw = #{record.sNumberw,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.campus.order.domain.Settlement" >
+    update settlement
+    <set >
+      <if test="sCheckbox != null" >
+        s_checkbox = #{sCheckbox,jdbcType=VARCHAR},
+      </if>
+      <if test="sPiocn != null" >
+        s_piocn = #{sPiocn,jdbcType=VARCHAR},
+      </if>
+      <if test="sCname != null" >
+        s_cname = #{sCname,jdbcType=VARCHAR},
+      </if>
+      <if test="sCuxiao != null" >
+        s_cuxiao = #{sCuxiao,jdbcType=DECIMAL},
+      </if>
+      <if test="sCount != null" >
+        s_count = #{sCount,jdbcType=BIGINT},
+      </if>
+      <if test="sPrice != null" >
+        s_price = #{sPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="sNumberw != null" >
+        s_numberw = #{sNumberw,jdbcType=BIGINT},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.campus.order.domain.Settlement" >
+    update settlement
+    set s_checkbox = #{sCheckbox,jdbcType=VARCHAR},
+      s_piocn = #{sPiocn,jdbcType=VARCHAR},
+      s_cname = #{sCname,jdbcType=VARCHAR},
+      s_cuxiao = #{sCuxiao,jdbcType=DECIMAL},
+      s_count = #{sCount,jdbcType=BIGINT},
+      s_price = #{sPrice,jdbcType=DECIMAL},
+      uid = #{uid,jdbcType=BIGINT},
+      s_numberw = #{sNumberw,jdbcType=BIGINT}
+    where s_id = #{sId,jdbcType=BIGINT}
+  </update>
+</mapper>

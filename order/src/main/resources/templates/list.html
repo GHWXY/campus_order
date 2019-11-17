@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>产品分类页面</title>
+ <meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发" />
+ <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
+ <meta name="author" content="DeathGhost"/>
+ <link th:href="@{~/style/style.css}" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" th:src="@{~/js/public.js}"></script>
+ <script type="text/javascript" th:src="@{~/js/jquery.js}"></script>
+ <script type="text/javascript" th:src="@{~/js/jqpublic.js}"></script>
+</head>
+<body>
+<div th:include="header :: header"></div>
+<!--Start content-->
+<section class="Psection">
+ <section class="fslist_navtree">
+  <ul class="select">
+		<li class="select-list" >
+			<dl id="select1" >
+				<dt>分类：</dt>
+				<dd class="select-all selected"><a href="javascript:">全部</a></dd>
+				<dd th:each="list:${type}"><a href="javascript:"th:text="${list.gettName()}">火锅/干锅</a></dd>
+
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select2">
+				<dt>位置：</dt>
+				<dd class="select-all selected"><a href="javascript:">全部</a></dd>
+				<dd th:each="mer:${mer}"><a href="javascript:" th:text="${mer.getmName()}">高新区</a></dd>
+
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select3">
+				<dt>餐点：</dt>
+				<dd class="select-all selected"><a href="javascript:">全部</a></dd>
+				<dd><a href="javascript:">早餐</a></dd>
+				<dd><a href="javascript:">午餐</a></dd>
+				<dd><a href="javascript:">晚餐</a></dd>
+			</dl>
+		</li>
+
+		<li class="select-result">
+			<dl>
+			 <dd class="select-no">已选择：</dd>
+			</dl>
+		</li>
+	</ul>
+ </section>
+<section class="Fslmenu">
+ <a href="#" title="默认排序">
+  <span>
+  <span>默认排序</span>
+  <span></span>
+  </span>
+ </a>
+ <a href="#" title="评价">
+  <span>
+  <span>评价</span>
+  <span class="s-up"></span>
+  </span>
+ </a>
+ <a href="#" title="销量">
+  <span>
+  <span>销量</span>
+  <span class="s-up"></span>
+  </span>
+ </a>
+ <a href="#" title="价格排序">
+  <span>
+  <span>价格</span>
+  <span class="s-down"></span>
+  </span>
+ </a>
+ <a href="#" title="发布时间排序">
+  <span>
+  <span>发布时间</span>
+  <span class="s-up"></span>
+  </span>
+ </a>
+</section>
+<section class="Fsl">
+ <ul>
+  <li th:each="prolist:${prolist}">
+   <a th:href="@{/shop1(mid=${prolist.getmId()})}" target="_blank" title="调用产品名/店铺名"><img th:src="@{/images/sql/{name}(name=${prolist.getpPicon()})}"></a>
+   <hgroup>
+   <h3 th:text="${prolist.getpName()}">【大明宫】***川菜馆</h3>
+   </hgroup>
+   <p th:text="'位置：'+${prolist['mId']}+'号窗口'"></p>
+   <p th:text="'人均：'+${prolist['pPromotion']}+'~'+${prolist['pPrice']}+' 元'"></p>
+   <p>
+    <span class="Score-l">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-off.png">
+    <span class="Score-v">4.8</span>
+    </span>
+    <span class="DSBUTTON"><a th:href="@{/detailsp1(pid=${prolist.getpId()})}" target="_blank" class="Fontfff">点外卖</a></span>
+   </p>
+  </li>
+<!--  <li>
+   <a href="shop.html" target="_blank" title="调用产品名/店铺名"><img src="upload/03.jpg"></a>
+   <hgroup>
+   <h3>【大雁塔】***川菜馆</h3>
+   <h4></h4>
+   </hgroup>
+   <p>菜系：川湘菜</p>
+   <p>地址：西安市莲湖区土门十字往右100米</p>
+   <p>人均：20~50元</p>
+   <p>
+    <span class="Score-l">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-off.png">
+    <span class="Score-v">4.8</span>
+    </span>
+    <span class="DSBUTTON"><a href="shop.html" target="_blank" class="Fontfff">点外卖</a></span>
+   </p>
+  </li>
+  <li>
+   <a href="shop.html" target="_blank" title="调用产品名/店铺名"><img src="upload/03.jpg"></a>
+   <hgroup>
+   <h3>【南稍门】***川菜馆</h3>
+   <h4></h4>
+   </hgroup>
+   <p>菜系：川湘菜</p>
+   <p>地址：西安市莲湖区土门十字往右100米</p>
+   <p>人均：20~50元</p>
+   <p>
+    <span class="Score-l">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-off.png">
+    <span class="Score-v">4.8</span>
+    </span>
+    <span class="DSBUTTON"><a href="shop.html" target="_blank" class="Fontfff">点外卖</a></span>
+   </p>
+  </li>
+  <li>
+   <a href="shop.html" target="_blank" title="调用产品名/店铺名"><img src="upload/03.jpg"></a>
+   <hgroup>
+   <h3>【小雁塔】***川菜馆</h3>
+   <h4></h4>
+   </hgroup>
+   <p>菜系：川湘菜</p>
+   <p>地址：西安市莲湖区土门十字往右100米</p>
+   <p>人均：20~50元</p>
+   <p>
+    <span class="Score-l">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-off.png">
+    <span class="Score-v">4.8</span>
+    </span>
+    <span class="DSBUTTON"><a href="shop.html" target="_blank" class="Fontfff">点外卖</a></span>
+   </p>
+  </li>-->
+ </ul>
+ <aside>
+  <div class="title">热门商家</div>
+  <div class="C-list" th:if="3 == ${mer['mId']}"  th:each="mer:${mer}">
+   <a th:href="@{/shop1(mid=${mer['mId']})}" target="_blank" title="店铺名称"><img th:src="@{/images/shop/{name}(name=${mer['mPhoto']})}"></a>
+   <p><a th:href="@{/shop1(mid=${mer.getmId()})}" target="_blank" th:text="${mer.getmName()}">[大雁塔]店铺名称</a>
+    <span style=" float:right">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-off.png">
+    <span class="ALscore">4.8</span>
+   </span>
+   </p>
+  </div>
+ <div class="C-list" th:if="1 == ${mer['mId']}"  th:each="mer:${mer}">
+   <a th:href="@{/shop1(mid=${mer['mId']})}" target="_blank" title="店铺名称"><img th:src="@{/images/shop/{name}(name=${mer['mPhoto']})}"></a>
+   <p><a th:href="@{/shop1(mid=${mer.getmId()})}" target="_blank" th:text="${mer.getmName()}">[大雁塔]店铺名称</a>
+    <span style=" float:right">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-off.png">
+    <span class="ALscore">4.8</span>
+   </span>
+   </p>
+  </div>
+ </aside>
+ <div class="TurnPage">
+  <a href="#">
+  <span class="Prev"><i></i>首页</span>
+  </a>
+  <a href="#"><span class="PNumber">1</span></a>
+  <a href="#"><span class="PNumber">2</span></a>
+  <a href="#">
+  <span class="Next">最后一页<i></i></span>
+  </a>
+ </div>
+</section>
+</section>
+<!--End content-->
+<div class="F-link"></div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>
